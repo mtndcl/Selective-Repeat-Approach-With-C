@@ -246,7 +246,7 @@ void  Fix(){
               temp->droptime--;
               temp->timeelapsed=1;
               
-              printf("- It is timeout for data packet (id:%d), so it has been resent now!0\n",temp->data);
+              printf("- It is timeout for data packet (id:%d), so it has been resent now!\n",temp->data);
             }
           
              
@@ -288,7 +288,7 @@ void DeleteElement(){
         if(head->timeelapsed==head->timeout+1){
         
 
-          printf("- It is timeout for data packet (id:%d), so it has been resent now!0\n",head->data);
+          printf("- It is timeout for data packet (id:%d), so it has been resent now!\n",head->data);
           head->droptime--;
           head->timeelapsed=1;
 
@@ -300,7 +300,7 @@ void DeleteElement(){
           temp=head->next;
           for(temp;temp!=NULL;temp=temp->next){
               if(temp->timeelapsed==temp->roundtriptime+1  &&  temp->droptime==0 && temp->achived==0 ){
-                  printf("- Data packet (id:%d) has now been ACK'ed by receiver!1\n",temp->data);
+                  printf("- Data packet (id:%d) has now been ACK'ed by receiver!\n",temp->data);
                   temp->achived=1;
                   
                   totalsendenddata=totalsendenddata+temp->packetsize;
@@ -323,7 +323,7 @@ void DeleteElement(){
           
          
           if(head->achived==0){
-            printf("- Data packet (id:%d) has now been ACK'ed by receiver!0\n",head->data);
+            printf("- Data packet (id:%d) has now been ACK'ed by receiver!\n",head->data);
             totalsendenddata=totalsendenddata+head->packetsize;
             sumtime+=head->passedtime;
           }
@@ -402,6 +402,8 @@ void main(int argc, char *argv[]) {
   if(r>0){
     numberbiit++;
   }
+
+  init();
   while(numberbiit!=data){
       
 
@@ -467,8 +469,8 @@ void main(int argc, char *argv[]) {
   printf("Window Size                          :        %02d\n",windowsize);
   printf("Timeout                              :        %04d Sec.\n",timeout);
   printf("RTT                                  :        %04d Sec.\n",roundtriptime);
-  printf("Data Size                            :        %04d Byte\n",datasize);
-  printf("Packet Size                          :        %04d Byte\n",p);
+  printf("Data Size                            :        %.2f Byte\n",(float)datasize);
+  printf("Packet Size                          :        %0.2f Byte\n",(float)p);
   printf("---------------------------------------------------\n");
   printf("Results:                                           \n");
   printf("---------------------------------------------------\n");
